@@ -1,0 +1,227 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Aclaraciones previas de compilación
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Existen distintas opciones para la configuración rápida según necesidades: 
+% Opción 1: La más sencilla es configurar la compilación rápida como PdfLaTex + Bib(la)tex + PdfLaTex(x2) + Ver pdf. Esta compilación falla si no se inserta al menos una cita bibliográfica.
+% Opción 2: Configurar LaTex + Bib(la)tex + LaTeX(x2) + dvips+ pvs2pdf + ver pdf si se quiere usar tikz y tree-dvips. Al usar este tipo de compilación, las imágenes solo pueden tener extensión eps.
+% Para visualizar cambios en el índice temático, correr antes LatexMk
+% Antes de correr la compilación rápida seleccionar siempre sobre este documento "Definir documento actual como 'documento maestro'" en "opciones". Si no se hace, al tratar de compilar desde los archivos tex de los capítulos va a saltar error.
+% Dejamos descomentados solamente los paquetes que consideramos esenciales y algunas pautas básicas de uso y comandos relevantes.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Empieza el preámbulo
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper, 12pt, twoside]{report} %Tipo de documento y tamaño de letra
+%\usepackage[paperheight=24cm, paperwidth=17cm, tmargin=2cm, bmargin=2cm, lmargin=2.5cm, rmargin=2.5cm]{geometry} % Con este comando se puede personalizar el tamaño de papel y márgenes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Paquetes de tipografía e idioma
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[normalem]{ulem}
+\usepackage{lmodern} % La fuente
+\usepackage{epic,eepic}
+\usepackage{xurl} % Para visualizar las URLS. El comando es \url{nombre-de-página}
+
+% Paquetes en general
+\usepackage{natbib} %Paquete para la bibliografia. Si no se quiere agregar bibliografía, comentar esta línea, las líneas de bibliografía al final y cambiar la compilación rápida a una que no involucre biblatex
+%\usepackage{stmaryrd} %Para caracteres tipográficos especiales, especialmente útil para semántica. Ver información en https://ctan.org/pkg/stmaryrd
+%\usepackage{tipa} % Para símbolos fonéticos. Ver más información en https://ctan.org/pkg/tipa
+%\usepackage{longtable} % Para permitir tablas muy largas que llevan más de una página. Hay que poner la tabla enmarcada en \begin{longtable}\end{longtable}
+%\usepackage{multirow, booktabs, enumerate}
+%\usepackage{adjustbox}
+%\usepackage{float}
+%\usepackage{multicol} % Para columnas. Enmarcar en \begin{multicols}{número-de-columnas} XXX XXX XXX \end{multicols}
+%\usepackage{ragged2e} % Para alineación
+%\usepackage{listings}
+%\usepackage{halloweenmath} % Para simbolitos simpáticos de halloween. Probar estos comandos: $\mathbat$ $\mathghost$ $\skull$ Ver más información en https://ctan.org/pkg/halloweenmath
+
+% Paquetes para gestionar contadores
+\usepackage{expex} %Paquete para gestionar ejemplos. Ver información en https://ctan.org/pkg/expex
+\usepackage{etoolbox} %Para resetear el contador de ejemplos de cada capítulo
+\pretocmd{\chapter}{\excnt=1}{}{} %Para resetear el contador de ejemplos en cada capítulo
+\usepackage{chngcntr} %Este paquete sirve para cambiar la orientación de una página. Ver información en https://ctan.org/pkg/chngcntr
+
+\renewcommand\thesection{\arabic{section}} 
+\renewcommand\thefigure{\arabic{figure}}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+
+% Paquetes para imágenes
+%\usepackage{qtree} % Paquetes para construir árboles. 
+%\usepackage{tree-dvips}
+%\usepackage{graphicx}
+%\usepackage{caption}
+%\usepackage{verbatim} % 'Util para introducir comentarios largos. En lugar de usar % enmarcar lo que se quiera comentar en \begin{comment}  \end{comment}. 
+%\usepackage{tikz} % Paquete para construir gráficos. Funciona con un sistema de ejes cartesianos.
+%\usetikzlibrary{shapes,backgrounds}
+%\usepackage[inference]{semantic} %Sirve para hacer, por ejemplo, derivaciones categoriales
+%\usepackage{biblio-y-paquetes/avm} %Para hacer matrices de atributo valor. Ejemplo: \begin{avm}\[A a\]\end{avm}
+\usepackage{amssymb}
+\usepackage{amsmath} % Para abrir con una sola llave grande. También permite insertar texto dentro del modo matemático con \text{}
+%\usepackage{makecell} %Para dividir celdas en tablas de doble entrada
+\usepackage{wasysym}
+\usepackage{gensymb} %Para el símbolo de grado
+\usepackage{textcomp}
+%\usepackage{soul} %Paquete para tachar palabras (\sout{}) y subrayarlas (\ul{})
+%\renewcommand{\nompreamble}{The next list describes several symbols that will be later used within the body of the document} %Para ponerle una descripción a la lista de abreviaturas
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Metadatos del documento
+
+\title{
+	{título} \\
+	{\large Institución}
+}
+\author{Autor}
+\date{Fecha}
+
+% Para encabezados de página
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\fancyhf{}
+%\fancyhead[RE,LO]{\leftmark}
+%\fancyhead[LE,RO]{\thepage}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Paquetes de índices y abreviaturas
+
+%\usepackage[spanish]{nomencl} %paquete para lista de abreviaturas
+%\makenomenclature
+%\renewcommand{\nomname}{Lista de abreviaturas y símbolos usados} %para ponerle otro nombre a la lista de abreviaturas
+%\renewcommand{\nompreamble}{Lista de abreviaturas} %Para ponerle una descripción a la lista de abreviaturas
+%\renewcommand{\nompreamble}{\begin{multicols}{1}}
+%\renewcommand{\nompostamble}{\end{multicols}}
+
+\usepackage{imakeidx} %paquete para índice temático. Comandos relevantes: marca tema \index{tema} marca subtema dentro de un tema \index{tema!subtema} abre un rango sobre el tema \index{tema|(} cierra un rango sobre el tema \index{tema|)}
+\makeindex[columns=2, intoc]
+
+\usepackage[toc,page]{appendix} %Para formato de apéndices. Ver http://mirrors.ibiblio.org/CTAN/macros/latex/contrib/appendix/appendix.pdf
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Esto es para crear un entorno en el que poner una dedicatoria, aunque se puede usar también para otras páginas separadoras con frases, datos legales u otras cosas. Para invocar ese entorno usar los comandos \begin{dedication} \end{dedication}
+
+\newenvironment{dedication}
+  {\clearpage           % En página nueva, se puede comentar \clearpage para que no haga una nueva página
+   \thispagestyle{empty}% sin encabezado ni pie de página
+   \vspace*{\stretch{1}}% Deja espacio arriba
+%   \itshape             % Si se descomenta, el texto aparece en itálicas
+   \raggedleft          % Alineación derecha
+   
+  }
+  {\par % fin del parágrafo
+   \vspace{\stretch{3}} % El espacio inferior es tres veces mayor que el superior
+   \clearpage           % Termina la página
+  }
+
+\makeatletter
+\let\ps@plain\ps@empty
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{gb4e} %Paquete para ejemplos
+%\counterwithin{exx}{chapter} % resetea los números de ejemplo por sección para gb4e
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Empieza el documento
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\pagenumbering{roman} % Esto es para que toda la primera parte esté numerada en números romanos
+
+\maketitle % imprime el título
+
+
+\begin{quote}
+Título de la tesis: \\
+Doctorando: \\
+Expediente N$\degree$: \\
+Director/a de Tesis: \\
+Co-director/a de Tesis: \\
+Año: 
+\\
+\vspace{1cm}
+\\
+Entregada como parte de los requerimientos para obtener el título de XXXXXXXX por INSTITUCIÓN.
+\\
+\vspace{1cm}\\
+ACLARACIÓN SOBRE FINANCIACIÓN.
+\end{quote}
+
+\begin{dedication}
+A la vida, que me ha dado tanto
+\end{dedication}
+
+\tableofcontents % Imprime el índice
+
+%\chapter*{Resumen}
+%\input{capitulos/plan-provisorio}
+
+\chapter*{Agradecimientos}
+\markboth{Agradecimientos}{Agradecimientos}
+\addcontentsline{toc}{chapter}{Agradecimientos}
+\input{capitulos/agradecimientos}
+
+\thispagestyle{empty}
+
+%\printnomenclature % Esto es para que imprima la nomenclatura
+%\addcontentsline{toc}{chapter}{Lista de abreviaturas y símbolos usados}
+
+\newpage % Deja una página en blanco
+ 
+\pagenumbering{arabic} % Esto es para que a partir de acá numere las páginas en números arábigos
+
+\chapter{Introducción}\label{doc-cap1}
+\input{capitulos/capitulo1}
+
+\chapter{Título 2}\label{doc-cap2}
+\input{capitulos/capitulo2}
+
+\chapter{Título 3}\label{doc-cap3}
+\input{capitulos/capitulo3}
+
+\chapter{Título 4}\label{doc-cap4}
+\input{capitulos/capitulo4}
+
+\chapter{Título 5}\label{doc-cap5}
+\input{capitulos/capitulo5}
+
+\chapter{Consideraciones finales}\label{doc-conclusiones}
+\input{capitulos/conclusiones}
+
+
+\newpage
+\chapter*{Apéndice}
+\markboth{Apéndice}{Apéndice}
+\addcontentsline{toc}{chapter}{Apéndice}
+\setcounter{section}{0}
+\input{capitulos/apendice}
+
+
+\bibliography{biblio-y-paquetes/bibliogeneral} % Esto es para configurar el archivo con la base de datos bibliográficas
+% Estos comandos que siguen son para configurar el tipo de estilo bibliográfico. Dejar descomentado solo uno.
+%\bibliographystyle{biblio-y-paquetes/apalike-es}
+\bibliographystyle{biblio-y-paquetes/linquiry4}
+
+\listoffigures
+\addcontentsline{toc}{chapter}{Índice de figuras}
+ 
+\listoftables
+\addcontentsline{toc}{chapter}{Índice de tablas}
+
+\printindex
+
+
+\end{document}

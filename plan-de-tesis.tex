@@ -1,0 +1,77 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Aclaraciones previas de compilación
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Existen distintas opciones para la configuración rápida según necesidades: 
+% Opción 1: La más sencilla es configurar la compilación rápida como PdfLaTex + Bib(la)tex + PdfLaTex(x2) + Ver pdf. Esta compilación falla si no se inserta al menos una cita bibliográfica.
+% Opción 2: Configurar LaTex + Bib(la)tex + LaTeX(x2) + dvips+ pvs2pdf + ver pdf si se quiere usar tikz y tree-dvips. Al usar este tipo de compilación, las imágenes solo pueden tener extensión eps.
+% Antes de correr la compilación rápida seleccionar siempre sobre este documento "Definir documento actual como 'documento maestro'" en "opciones". Si no se hace, al tratar de compilar desde los archivos tex de los capítulos va a saltar error.
+% Dejamos descomentados solamente los paquetes que consideramos esenciales y algunas pautas básicas de uso y comandos relevantes.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Empieza el preámbulo
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper, 12pt, twoside]{report} %Tipo de documento y tamaño de letra
+%\usepackage[paperheight=24cm, paperwidth=17cm, tmargin=2cm, bmargin=2cm, lmargin=2.5cm, rmargin=2.5cm]{geometry} % Con este comando se puede personalizar el tamaño de papel y márgenes
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[normalem]{ulem}
+
+\usepackage{natbib}
+%sort,comma
+\usepackage{lmodern}
+\usepackage{stmaryrd}
+\usepackage{marginnote}
+\usepackage{qtree, tree-dvips, graphicx, caption, verbatim}
+\usepackage{biblio-y-paquetes/avm}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{textcomp}
+\usepackage{soul}
+\usepackage{natbib}
+\usepackage{multicol}
+\usepackage{expex}
+\usepackage{gb4e}
+\usepackage{array}
+\usepackage{gensymb}
+
+\title{Título}
+\date{Fecha}
+\author{Autor \\ Mail \\}
+
+\begin{document}
+\maketitle
+
+\begin{quote}
+Doctorando/a: \\
+Expediente N$\degree$: \\
+Director/a de Tesis: \\
+Co-director/a de Tesis: \\
+\\
+FINANCIACIÓN
+\end{quote}
+
+\section{Introducción}
+
+\cite{Abney:1987nounphrase}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliografía
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliography{biblio-y-paquetes/bibliogeneral} % Se puede cambiar bibliogeneral por el nombre de otro archivo bib que contenga entradas bibliográficas
+
+% Dejar descomentada solo una de las siguientes líneas 
+%\bibliographystyle{biblio-y-paquetes/apalike-es}
+%\bibliographystyle{biblio-y-paquetes/linquiry3}
+\bibliographystyle{biblio-y-paquetes/linquiry4}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}
