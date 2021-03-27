@@ -49,6 +49,7 @@ Thumbs.db
 *.wmv
 
 # Tex projects
+*.ps
 *.aux
 *.out
 *.blg

@@ -1,0 +1,1 @@
+Esta carpeta es para guardar archivos relacionados con los trámites. Tener en cuenta que para cargar en el repositorio archivos pdf hay que subirlos especialmente, ya que pdf es una extensión que está incluida en .gitignore. 
