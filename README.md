@@ -20,5 +20,7 @@ Esta carpeta está pensada para guardar en ella las imágenes. Recordar que si s
 
 Contiene la estructura básica de la tesis/libro.
 
+## Script remove-aux-files.sh
 
+El archivo remove-aux-files contiene un script de bash para borrar todos los archivos auxiliares de crea LaTex en el directorio principal y en sus subdirectorios (pero no en los directorios que contengan las subcarpetas de la principal), en caso de que se quiera limpiar la copia local del repositorio. El script no elimina los archivos en pdf, tex, bib, bst, png, eps, jpg, entre otros.
 
